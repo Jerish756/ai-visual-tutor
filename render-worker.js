@@ -55,8 +55,13 @@ async function runWorkerLoop() {
 
       await processJob(job);
     } catch (err) {
-      console.error("Worker loop error:", err.message || err);
-      await sleep(POLL_INTERVAL_MS);
+      if (err.message.includes("fetch failed") || err.code === "ECONNREFUSED") {
+        console.log("📡 Render server is sleeping or unreachable. Retrying in 10s...");
+        await sleep(10000);
+      } else {
+        console.error("Worker loop error:", err.message || err);
+        await sleep(POLL_INTERVAL_MS);
+      }
     }
   }
 }
