@@ -9,7 +9,7 @@ const RENDER_SCRIPT = path.join(__dirname, "..", "remotion-renderer", "render.js
 const ROOT_DIR      = path.join(__dirname, "..");
 
 const FPS       = 30;
-const ASSET_PORT = process.env.LOCAL_ASSET_PORT || process.env.PORT || 3000;
+
 
 // ─────────────────────────────────────────────────────────────────
 // 1.  Download background images → save locally as scene{i}.png
@@ -54,11 +54,13 @@ async function downloadImages(scenes) {
       fs.writeFileSync(localPath, canvas.toBuffer("image/png"));
     }
 
+    const assetPort = process.env.LOCAL_ASSET_PORT || process.env.PORT || 3000;
+
     // ✅ Use HTTP URL — Express serves ./ statically, no file:// CORS issues
     enriched.push({
       ...scene,
-      imagePath: `http://127.0.0.1:${ASSET_PORT}/scene${i}.png`,
-      audioPath: `http://127.0.0.1:${ASSET_PORT}/${fs.existsSync(path.join(ROOT_DIR, `audio${i}.wav`)) ? `audio${i}.wav` : `audio${i}.mp3`}`,
+      imagePath: `http://127.0.0.1:${assetPort}/scene${i}.png`,
+      audioPath: `http://127.0.0.1:${assetPort}/${fs.existsSync(path.join(ROOT_DIR, `audio${i}.wav`)) ? `audio${i}.wav` : `audio${i}.mp3`}`,
     });
   }
 
