@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+/remotion-renderer/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+server.err.log
+server.out.log
+
+# Media & Generated Assets
+*.mp3
+*.wav
+*.mp4
+*.png
+scene*.png
+audio*.mp3
+audio*.wav
+output_*.mp4
+verify-output.mp4
+test-video.mp4
+
+# Local Storage/State
+/uploads/*
+!/uploads/.gitkeep
+/data/*.json
+!/data/.gitkeep
+/data/physics/
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Remotion/Build
+.remotion/
+out/
+build/
+dist/

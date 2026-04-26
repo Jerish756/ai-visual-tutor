@@ -1,0 +1,692 @@
+{
+  "sessions": [
+    {
+      "id": "1776939350121",
+      "topic": "insertion sort",
+      "difficulty": "school",
+      "uploadedFile": null,
+      "startTime": "2026-04-23T10:15:50.121Z",
+      "endTime": "2026-04-23T10:45:08.859Z",
+      "messages": [
+        {
+          "id": "1776939350125",
+          "role": "user",
+          "content": "insertion sort",
+          "timestamp": "2026-04-23T10:15:50.125Z"
+        },
+        {
+          "id": "1776939350129",
+          "role": "user",
+          "content": "School",
+          "timestamp": "2026-04-23T10:15:50.129Z"
+        }
+      ],
+      "videos": [
+        {
+          "id": "1776940015911",
+          "url": "/output_1776939394111.mp4",
+          "scenes": null,
+          "generatedAt": "2026-04-23T10:26:55.911Z"
+        }
+      ],
+      "quizzes": [
+        {
+          "id": "1776941091145",
+          "questions": [
+            {
+              "question": "What is the main purpose of the insertion sort algorithm?",
+              "options": [
+                "To find the median of a list",
+                "To sort a list in ascending order",
+                "To find the sum of a list",
+                "To find the product of a list"
+              ],
+              "answer": "To sort a list in ascending order"
+            },
+            {
+              "question": "How does insertion sort work for a list of numbers?",
+              "options": [
+                "By sorting in descending order and then reversing",
+                "By repeatedly comparing and swapping adjacent elements",
+                "By using a temporary array to store the sorted elements",
+                "By using recursion to sort the list"
+              ],
+              "answer": "By repeatedly comparing and swapping adjacent elements"
+            },
+            {
+              "question": "What is the first step in the insertion sort algorithm?",
+              "options": [
+                "Comparing the first two elements",
+                "Comparing the last two elements",
+                "Comparing the first element with the rest",
+                "Comparing the last element with the rest"
+              ],
+              "answer": "Comparing the first element with the rest"
+            },
+            {
+              "question": "Why does insertion sort have a time complexity of O(n^2)?",
+              "options": [
+                "Because it has to compare each element with every other element",
+                "Because it has to make a copy of the list",
+                "Because it has to use a temporary array",
+                "Because it has to use recursion"
+              ],
+              "answer": "Because it has to compare each element with every other element"
+            },
+            {
+              "question": "Can insertion sort be used for sorting strings?",
+              "options": [
+                "No, only numbers can be sorted",
+                "Yes, strings can be sorted using a modified version of insertion sort",
+                "No, it's only for lists of integers",
+                "Yes, strings can be sorted using the same algorithm as for numbers"
+              ],
+              "answer": "Yes, strings can be sorted using a modified version of insertion sort"
+            },
+            {
+              "question": "What is the algorithm used by insertion sort for comparing and swapping elements?",
+              "options": [
+                "Bubble sort",
+                "Selection sort",
+                "Insertion sort itself",
+                "Merge sort"
+              ],
+              "answer": "Bubble sort"
+            },
+            {
+              "question": "Why is insertion sort a stable sorting algorithm?",
+              "options": [
+                "Because it only sorts numbers",
+                "Because it always preserves the order of equal elements",
+                "Because it never compares elements",
+                "Because it only uses recursion"
+              ],
+              "answer": "Because it always preserves the order of equal elements"
+            },
+            {
+              "question": "Can insertion sort be used for sorting linked lists?",
+              "options": [
+                "No, it's only for arrays",
+                "Yes, insertion sort can be used for linked lists with modifications",
+                "Yes, insertion sort can be used for linked lists without modifications",
+                "No, sorting linked lists is not possible"
+              ],
+              "answer": "Yes, insertion sort can be used for linked lists with modifications"
+            }
+          ],
+          "userAnswers": [
+            {
+              "question": "What is the main purpose of the insertion sort algorithm?",
+              "userAnswer": "To find the median of a list",
+              "correctAnswer": "To sort a list in ascending order",
+              "isCorrect": false
+            },
+            {
+              "question": "How does insertion sort work for a list of numbers?",
+              "userAnswer": "By sorting in descending order and then reversing",
+              "correctAnswer": "By repeatedly comparing and swapping adjacent elements",
+              "isCorrect": false
+            },
+            {
+              "question": "What is the first step in the insertion sort algorithm?",
+              "userAnswer": "Comparing the first two elements",
+              "correctAnswer": "Comparing the first element with the rest",
+              "isCorrect": false
+            },
+            {
+              "question": "Why does insertion sort have a time complexity of O(n^2)?",
+              "userAnswer": "Because it has to compare each element with every other element",
+              "correctAnswer": "Because it has to compare each element with every other element",
+              "isCorrect": true
+            },
+            {
+              "question": "Can insertion sort be used for sorting strings?",
+              "userAnswer": "No, only numbers can be sorted",
+              "correctAnswer": "Yes, strings can be sorted using a modified version of insertion sort",
+              "isCorrect": false
+            },
+            {
+              "question": "What is the algorithm used by insertion sort for comparing and swapping elements?",
+              "userAnswer": "Bubble sort",
+              "correctAnswer": "Bubble sort",
+              "isCorrect": true
+            },
+            {
+              "question": "Why is insertion sort a stable sorting algorithm?",
+              "userAnswer": "Because it only sorts numbers",
+              "correctAnswer": "Because it always preserves the order of equal elements",
+              "isCorrect": false
+            },
+            {
+              "question": "Can insertion sort be used for sorting linked lists?",
+              "userAnswer": "No, it's only for arrays",
+              "correctAnswer": "Yes, insertion sort can be used for linked lists with modifications",
+              "isCorrect": false
+            }
+          ],
+          "score": "2/8",
+          "accuracy": "25%",
+          "completedAt": "2026-04-23T10:44:51.145Z"
+        }
+      ]
+    },
+    {
+      "id": "1776926666487",
+      "topic": "selection sort",
+      "difficulty": "school",
+      "uploadedFile": null,
+      "startTime": "2026-04-23T06:44:26.487Z",
+      "endTime": null,
+      "messages": [
+        {
+          "id": "1776926666492",
+          "role": "user",
+          "content": "selection sort",
+          "timestamp": "2026-04-23T06:44:26.492Z"
+        },
+        {
+          "id": "1776926666496",
+          "role": "user",
+          "content": "School",
+          "timestamp": "2026-04-23T06:44:26.496Z"
+        }
+      ],
+      "videos": [
+        {
+          "id": "1776927462755",
+          "url": "/output_1776926880502.mp4",
+          "scenes": null,
+          "generatedAt": "2026-04-23T06:57:42.755Z"
+        }
+      ],
+      "quizzes": []
+    },
+    {
+      "id": "1776918008442",
+      "topic": "photosynthesis",
+      "difficulty": "school",
+      "uploadedFile": null,
+      "startTime": "2026-04-23T04:20:08.442Z",
+      "endTime": null,
+      "messages": [
+        {
+          "id": "1776918008449",
+          "role": "user",
+          "content": "photosynthesis",
+          "timestamp": "2026-04-23T04:20:08.449Z"
+        },
+        {
+          "id": "1776918008454",
+          "role": "user",
+          "content": "School",
+          "timestamp": "2026-04-23T04:20:08.454Z"
+        }
+      ],
+      "videos": [],
+      "quizzes": []
+    },
+    {
+      "id": "1776876667311",
+      "topic": "PDF upload",
+      "difficulty": "bachelors",
+      "uploadedFile": "Unit2_.pdf",
+      "startTime": "2026-04-22T16:51:07.311Z",
+      "endTime": null,
+      "messages": [
+        {
+          "id": "1776918008442",
+          "role": "user",
+          "content": "Hello, this is a test message!",
+          "timestamp": "2026-04-22T17:00:00.000Z"
+        },
+        {
+          "id": "1776918008442",
+          "role": "bot",
+          "content": "Here is a sample video.",
+          "timestamp": "2026-04-22T17:01:00.000Z"
+        }
+      ],
+      "videos": [],
+      "quizzes": [
+        {
+          "id": "1776876803447",
+          "questions": [
+            {
+              "question": "What is one of the required capabilities of an intelligent system according to the text?",
+              "options": [
+                "Understand a given situation or challenge",
+                "Analyze possible actions",
+                "Select actions that help achieve a desired goal",
+                "Create a complex algorithm"
+              ],
+              "answer": "Understand a given situation or challenge"
+            },
+            {
+              "question": "What does search help the agent decide in AI problem solving?",
+              "options": [
+                "Which action to take next",
+                "Who to interact with",
+                "What to eat for lunch",
+                "What to wear for the day"
+              ],
+              "answer": "Which action to take next"
+            },
+            {
+              "question": "How does an AI system formulate a problem in complex environments?",
+              "options": [
+                "Relying on predefined rules only",
+                "Analyzing possible actions and selecting the best one",
+                "Ignoring search algorithms",
+                "Deciding randomly"
+              ],
+              "answer": "Analyzing possible actions and selecting the best one"
+            },
+            {
+              "question": "What is the role of search in AI problem solving mentioned in the text?",
+              "options": [
+                "To act randomly",
+                "To rely only on predefined rules",
+                "To explore the state space using search algorithms",
+                "To create a new goal"
+              ],
+              "answer": "To explore the state space using search algorithms"
+            },
+            {
+              "question": "Which of the following is a real-world application of AI problem solving mentioned in the text?",
+              "options": [
+                "Route planning systems that find the shortest or fastest path between locations",
+                "A self-driving car",
+                "Predicting the weather forecast",
+                "Booking a hotel room"
+              ],
+              "answer": "Route planning systems that find the shortest or fastest path between locations"
+            },
+            {
+              "question": "What is the process called in problem formulation and abstraction?",
+              "options": [
+                "Abstraction",
+                "Search algorithm creation",
+                "Solution verification",
+                "Behavioral refinement"
+              ],
+              "answer": "Abstraction"
+            },
+            {
+              "question": "In problem formulation and abstraction, which characteristics are ignored when modeling the problem of reaching Bucharest?",
+              "options": [
+                "Weather, Radio, Traffic, and Companions",
+                "Traffic, Weather, Time, and Food",
+                "Radio, Internet, Weather, and Nature",
+                "Weather, radio, traffic, or companions"
+              ],
+              "answer": "Weather, radio, traffic, or companions"
+            },
+            {
+              "question": "What is the benefit of using search in AI problem solving according to the text?",
+              "options": [
+                "The AI system would act randomly",
+                "The AI system would rely only on predefined rules",
+                "The AI system could operate in complex and dynamic environments",
+                "The AI system would need less computation power"
+              ],
+              "answer": "The AI system could operate in complex and dynamic environments"
+            }
+          ],
+          "userAnswers": [
+            {
+              "question": "What is one of the required capabilities of an intelligent system according to the text?",
+              "userAnswer": "Understand a given situation or challenge",
+              "correctAnswer": "Understand a given situation or challenge",
+              "isCorrect": true
+            },
+            {
+              "question": "What does search help the agent decide in AI problem solving?",
+              "userAnswer": "Which action to take next",
+              "correctAnswer": "Which action to take next",
+              "isCorrect": true
+            },
+            {
+              "question": "How does an AI system formulate a problem in complex environments?",
+              "userAnswer": "Relying on predefined rules only",
+              "correctAnswer": "Analyzing possible actions and selecting the best one",
+              "isCorrect": false
+            },
+            {
+              "question": "What is the role of search in AI problem solving mentioned in the text?",
+              "userAnswer": "To act randomly",
+              "correctAnswer": "To explore the state space using search algorithms",
+              "isCorrect": false
+            },
+            {
+              "question": "Which of the following is a real-world application of AI problem solving mentioned in the text?",
+              "userAnswer": "Route planning systems that find the shortest or fastest path between locations",
+              "correctAnswer": "Route planning systems that find the shortest or fastest path between locations",
+              "isCorrect": true
+            },
+            {
+              "question": "What is the process called in problem formulation and abstraction?",
+              "userAnswer": "Abstraction",
+              "correctAnswer": "Abstraction",
+              "isCorrect": true
+            },
+            {
+              "question": "In problem formulation and abstraction, which characteristics are ignored when modeling the problem of reaching Bucharest?",
+              "userAnswer": "Weather, Radio, Traffic, and Companions",
+              "correctAnswer": "Weather, radio, traffic, or companions",
+              "isCorrect": false
+            },
+            {
+              "question": "What is the benefit of using search in AI problem solving according to the text?",
+              "userAnswer": "The AI system would act randomly",
+              "correctAnswer": "The AI system could operate in complex and dynamic environments",
+              "isCorrect": false
+            }
+          ],
+          "score": "4/8",
+          "accuracy": "50%",
+          "completedAt": "2026-04-22T16:53:23.447Z"
+        }
+      ]
+    },
+    {
+      "id": "1776869331655",
+      "topic": "mitonchondria",
+      "difficulty": "school",
+      "uploadedFile": null,
+      "startTime": "2026-04-22T14:48:51.655Z",
+      "endTime": null,
+      "messages": [],
+      "videos": [],
+      "quizzes": [
+        {
+          "id": "1776872906759",
+          "questions": [
+            {
+              "question": "What is the main function of mitochondria in a cell?",
+              "options": [
+                "To make proteins",
+                "To store genetic information",
+                "To generate energy",
+                "To send signals"
+              ],
+              "answer": "To generate energy"
+            },
+            {
+              "question": "Where are mitochondria located in a cell?",
+              "options": [
+                "In the nucleus",
+                "In the cytoplasm",
+                "Outside the cell membrane",
+                "In the mitochondria"
+              ],
+              "answer": "In the cytoplasm"
+            },
+            {
+              "question": "Why do mitochondria have their own DNA?",
+              "options": [
+                "So they can store their own identity",
+                "Because they are not related to the cell",
+                "To generate energy more efficiently",
+                "To replicate themselves"
+              ],
+              "answer": "To replicate themselves"
+            },
+            {
+              "question": "Why do athletes need more mitochondria?",
+              "options": [
+                "Because they need more energy to run",
+                "Because they need more oxygen to breathe",
+                "To make their muscles stronger",
+                "To make their muscles smaller"
+              ],
+              "answer": "Because they need more energy to run"
+            },
+            {
+              "question": "What would happen if a cell has damaged mitochondria?",
+              "options": [
+                "The cell would become smaller",
+                "The cell would produce more energy",
+                "The cell would die",
+                "The cell would divide faster"
+              ],
+              "answer": "The cell would die"
+            },
+            {
+              "question": "How do mitochondria generate energy?",
+              "options": [
+                "Through photosynthesis",
+                "Through cellular respiration",
+                "Through fermentation",
+                "Through diffusion"
+              ],
+              "answer": "Through cellular respiration"
+            },
+            {
+              "question": "Why are mitochondria important for our survival?",
+              "options": [
+                "Because they help us move",
+                "Because they help us think",
+                "Because they generate energy for the body",
+                "Because they store genetic information"
+              ],
+              "answer": "Because they generate energy for the body"
+            },
+            {
+              "question": "How do mitochondria adapt to changes in energy demand?",
+              "options": [
+                "By increasing their size",
+                "By increasing their number",
+                "By changing their function",
+                "By decreasing their energy production"
+              ],
+              "answer": "By increasing their number"
+            }
+          ],
+          "userAnswers": [
+            {
+              "question": "What is the main function of mitochondria in a cell?",
+              "userAnswer": "To make proteins",
+              "correctAnswer": "To generate energy",
+              "isCorrect": false
+            },
+            {
+              "question": "Where are mitochondria located in a cell?",
+              "userAnswer": "In the nucleus",
+              "correctAnswer": "In the cytoplasm",
+              "isCorrect": false
+            },
+            {
+              "question": "Why do mitochondria have their own DNA?",
+              "userAnswer": "So they can store their own identity",
+              "correctAnswer": "To replicate themselves",
+              "isCorrect": false
+            },
+            {
+              "question": "Why do athletes need more mitochondria?",
+              "userAnswer": "Because they need more energy to run",
+              "correctAnswer": "Because they need more energy to run",
+              "isCorrect": true
+            },
+            {
+              "question": "What would happen if a cell has damaged mitochondria?",
+              "userAnswer": "The cell would become smaller",
+              "correctAnswer": "The cell would die",
+              "isCorrect": false
+            },
+            {
+              "question": "How do mitochondria generate energy?",
+              "userAnswer": "Through photosynthesis",
+              "correctAnswer": "Through cellular respiration",
+              "isCorrect": false
+            },
+            {
+              "question": "Why are mitochondria important for our survival?",
+              "userAnswer": "Because they help us move",
+              "correctAnswer": "Because they generate energy for the body",
+              "isCorrect": false
+            },
+            {
+              "question": "How do mitochondria adapt to changes in energy demand?",
+              "userAnswer": "By increasing their size",
+              "correctAnswer": "By increasing their number",
+              "isCorrect": false
+            }
+          ],
+          "score": "1/8",
+          "accuracy": "13%",
+          "completedAt": "2026-04-22T15:48:26.759Z"
+        }
+      ]
+    },
+    {
+      "id": "1776753373857",
+      "topic": "binary search",
+      "difficulty": "school",
+      "uploadedFile": null,
+      "startTime": "2026-04-21T06:36:13.857Z",
+      "endTime": null,
+      "messages": [],
+      "videos": [],
+      "quizzes": [
+        {
+          "id": "1776753847361",
+          "questions": [
+            {
+              "question": "What is binary search?",
+              "options": [
+                "A way to search for a word in a dictionary",
+                "A method to sort a list of numbers",
+                "A technique to find an element in a sorted list",
+                "A formula to solve a math problem"
+              ],
+              "answer": "A technique to find an element in a sorted list"
+            },
+            {
+              "question": "Why do we use binary search?",
+              "options": [
+                "It's the fastest way to search for an element",
+                "It's the easiest way to search for an element",
+                "It's because we run out of elements to search",
+                "It's because the list is not sorted"
+              ],
+              "answer": "It's the fastest way to search for an element"
+            },
+            {
+              "question": "What happens when we perform a binary search?",
+              "options": [
+                "The algorithm looks at every element in the list",
+                "The algorithm compares the target element to the middle of the list",
+                "The algorithm splits the list into two halves and repeats",
+                "The algorithm gives up and returns nothing"
+              ],
+              "answer": "The algorithm splits the list into two halves and repeats"
+            },
+            {
+              "question": "Why do we need the list to be sorted for binary search?",
+              "options": [
+                "So the algorithm can find the element more easily",
+                "So the algorithm can avoid duplicate elements",
+                "So the algorithm can skip over empty spaces",
+                "So the algorithm can perform a different search"
+              ],
+              "answer": "So the algorithm can find the element more easily"
+            },
+            {
+              "question": "What happens when the target element is not in the list?",
+              "options": [
+                "The algorithm returns the target element",
+                "The algorithm tells us the element is not in the list",
+                "The algorithm says it can't find the element",
+                "The algorithm does nothing"
+              ],
+              "answer": "The algorithm tells us the element is not in the list"
+            },
+            {
+              "question": "How many comparisons does binary search make on average",
+              "options": [
+                "One comparison",
+                "The number of elements in the list",
+                "Log2 of the number of elements in the list",
+                "The number of elements in the list squared"
+              ],
+              "answer": "Log2 of the number of elements in the list"
+            },
+            {
+              "question": "Why is binary search more efficient than linear search?",
+              "options": [
+                "It uses more memory",
+                "It's harder to implement",
+                "It uses more CPU cycles",
+                "It eliminates half of the elements in each iteration"
+              ],
+              "answer": "It eliminates half of the elements in each iteration"
+            },
+            {
+              "question": "What is the advantage of using binary search over linear search in a real-life scenario?",
+              "options": [
+                "It's easier to understand",
+                "It's faster on small lists",
+                "It's better for large lists and large datasets",
+                "It's only for alphabetical searches"
+              ],
+              "answer": "It's better for large lists and large datasets"
+            }
+          ],
+          "userAnswers": [
+            {
+              "question": "What is binary search?",
+              "userAnswer": "A technique to find an element in a sorted list",
+              "correctAnswer": "A technique to find an element in a sorted list",
+              "isCorrect": true
+            },
+            {
+              "question": "Why do we use binary search?",
+              "userAnswer": "It's the fastest way to search for an element",
+              "correctAnswer": "It's the fastest way to search for an element",
+              "isCorrect": true
+            },
+            {
+              "question": "What happens when we perform a binary search?",
+              "userAnswer": "The algorithm compares the target element to the middle of the list",
+              "correctAnswer": "The algorithm splits the list into two halves and repeats",
+              "isCorrect": false
+            },
+            {
+              "question": "Why do we need the list to be sorted for binary search?",
+              "userAnswer": "So the algorithm can skip over empty spaces",
+              "correctAnswer": "So the algorithm can find the element more easily",
+              "isCorrect": false
+            },
+            {
+              "question": "What happens when the target element is not in the list?",
+              "userAnswer": "The algorithm tells us the element is not in the list",
+              "correctAnswer": "The algorithm tells us the element is not in the list",
+              "isCorrect": true
+            },
+            {
+              "question": "How many comparisons does binary search make on average",
+              "userAnswer": "Log2 of the number of elements in the list",
+              "correctAnswer": "Log2 of the number of elements in the list",
+              "isCorrect": true
+            },
+            {
+              "question": "Why is binary search more efficient than linear search?",
+              "userAnswer": "It eliminates half of the elements in each iteration",
+              "correctAnswer": "It eliminates half of the elements in each iteration",
+              "isCorrect": true
+            },
+            {
+              "question": "What is the advantage of using binary search over linear search in a real-life scenario?",
+              "userAnswer": "It's better for large lists and large datasets",
+              "correctAnswer": "It's better for large lists and large datasets",
+              "isCorrect": true
+            }
+          ],
+          "score": "6/8",
+          "accuracy": "75%",
+          "completedAt": "2026-04-21T06:44:07.361Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ai-visual-tutor
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: VIDEO_RENDER_MODE
+        value: worker
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX
+        value: ai-tutor
+      - key: PINECONE_HOST
+        value: ai-tutor-hikzjgf.svc.aped-4627-b74a.pinecone.io
+      - key: RENDER_WORKER_TOKEN
+        generateValue: true

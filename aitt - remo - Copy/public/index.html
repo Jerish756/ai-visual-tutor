@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lumina Learn</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #e8edf2; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .app { display: grid; grid-template-columns: 220px 1fr; height: 100vh; width: 100%; background: #f0f4f8; }
+    .sidebar { background: #fff; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; }
+    .sidebar-top { padding: 18px 16px 12px; }
+    .brand { font-size: 15px; font-weight: 600; color: #185FA5; margin-bottom: 16px; }
+    .new-session-btn { width: 100%; padding: 9px 12px; background: #185FA5; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; justify-content: center; }
+    .new-session-btn:hover { background: #0C447C; }
+    .nav { padding: 12px 8px; flex: 1; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 13px; color: #6b7280; cursor: pointer; margin-bottom: 2px; }
+    .nav-item:hover { background: #f3f4f6; }
+    .nav-item.active { background: #E6F1FB; color: #185FA5; font-weight: 500; }
+    .main { display: flex; flex-direction: column; overflow: hidden; }
+    .topbar { display: flex; align-items: center; padding: 14px 20px; background: #f0f4f8; border-bottom: 1px solid #e5e7eb; }
+    .topbar-title { font-size: 14px; font-weight: 500; color: #6b7280; }
+    .chat-area { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+    .msg-row { display: flex; gap: 10px; align-items: flex-start; }
+    .msg-row.user { flex-direction: row-reverse; }
+    .avatar { width: 30px; height: 30px; border-radius: 50%; background: #E6F1FB; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+    .user-avatar { background: #185FA5; color: #fff; font-size: 12px; font-weight: 600; }
+    .bubble { max-width: 70%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+    .bubble.bot { background: #fff; border: 1px solid #e5e7eb; color: #111; border-radius: 4px 12px 12px 12px; }
+    .bubble.user { background: #185FA5; color: #fff; border-radius: 12px 4px 12px 12px; }
+    .level-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 10px; max-width: 500px; }
+    .level-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; cursor: pointer; transition: border-color 0.15s; }
+    .level-card:hover { border-color: #185FA5; }
+    .level-card.selected { border: 2px solid #185FA5; }
+    .level-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .level-card p { font-size: 11px; color: #6b7280; line-height: 1.4; }
+    .level-card-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 16px; }
+    .badge-elite { background: #EEEDFE; color: #534AB7; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 99px; float: right; }
+    .status-msg { text-align: center; font-size: 11px; color: #9ca3af; padding: 4px 0; }
+    .input-area { padding: 14px 20px; background: #f0f4f8; }
+    .input-row { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #e5e7eb; border-radius: 99px; padding: 8px 8px 8px 14px; }
+    .input-row input[type=text] { flex: 1; border: none; outline: none; font-size: 13px; background: transparent; }
+    .file-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #e5e7eb; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+    .send-btn { width: 34px; height: 34px; border-radius: 50%; background: #185FA5; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; }
+    .send-btn:hover { background: #0C447C; }
+    .file-pill { display: inline-flex; align-items: center; gap: 6px; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; margin-bottom: 6px; }
+    .file-pill button { background: none; border: none; color: #185FA5; cursor: pointer; font-size: 14px; }
+    .footer-note { text-align: center; font-size: 10px; color: #9ca3af; padding: 6px 0 0; }
+    input[type=file] { display: none; }
+    .video-bubble { background: #fff; border: 1px solid #e5e7eb; border-radius: 4px 12px 12px 12px; padding: 10px; max-width: 80%; }
+    .video-bubble video { width: 100%; border-radius: 8px; margin-bottom: 8px; }
+    .quiz-btn { padding: 7px 14px; background: #185FA5; color: #fff; border: none; border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer; margin-top: 4px; }
+    .quiz-section { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; max-width: 85%; font-size: 13px; }
+    .quiz-q { margin-bottom: 12px; }
+    .quiz-q p { font-weight: 600; margin-bottom: 6px; }
+    .quiz-q label { display: block; padding: 3px 0; cursor: pointer; }
+    .quiz-submit { margin-top: 8px; padding: 7px 16px; background: #185FA5; color: #fff; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 500; }
+    .side-panel { display: none; flex-direction: column; flex: 1; overflow-y: auto; }
+    .side-panel.visible { display: flex; }
+    .ai-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    .ai-panel.visible { display: flex; }
+    .history-item { padding: 12px 20px; border-bottom: 1px solid #e5e7eb; cursor: pointer; }
+    .history-item:hover { background: #f9fafb; }
+    .history-item h5 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .history-item p { font-size: 11px; color: #6b7280; }
+    .panel-header { padding: 16px 20px; border-bottom: 1px solid #e5e7eb; }
+    .panel-header h3 { font-size: 14px; font-weight: 600; }
+    .panel-header p { font-size: 11px; color: #6b7280; margin-top: 2px; }
+    .empty-state { padding: 40px 20px; text-align: center; color: #9ca3af; font-size: 13px; }
+    .library-wrap { padding: 16px 20px; overflow-y: auto; }
+    .source-item { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .source-item h5 { font-size: 13px; margin-bottom: 4px; }
+    .source-item p { font-size: 11px; color: #6b7280; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">Lumina Learn</div>
+      <button class="new-session-btn" onclick="newSession()">+ New Session</button>
+    </div>
+    <div class="nav">
+      <div class="nav-item active" id="nav-ai" onclick="showPanel('ai')">🤖 AI Tutor</div>
+      <div class="nav-item" id="nav-history" onclick="showPanel('history')">🕐 History</div>
+      <div class="nav-item" id="nav-library" onclick="showPanel('library')">📚 Library</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="topbar-title" id="panel-title">AI Tutor</span>
+    </div>
+
+    <!-- AI PANEL -->
+    <div class="ai-panel visible" id="ai-panel">
+      <div class="chat-area" id="chat-area">
+        <div class="msg-row">
+          <div class="avatar">🤖</div>
+          <div class="bubble bot">Hello! What would you like to learn about today?</div>
+        </div>
+      </div>
+      <div style="padding:0 20px 4px" id="file-indicator"></div>
+      <div class="input-area">
+        <div class="input-row">
+          <label for="file-upload" class="file-btn" title="Upload PDF">📎</label>
+          <input type="file" id="file-upload" accept=".pdf" onchange="handleFileSelect(this)">
+          <input type="text" id="chat-input" placeholder="Ask your tutor anything..." onkeydown="if(event.key==='Enter')sendMessage()">
+          <button class="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+        <div class="footer-note">AI-powered insights · Library integrated</div>
+      </div>
+    </div>
+
+    <!-- HISTORY PANEL -->
+    <div class="side-panel" id="history-panel">
+      <div class="panel-header">
+        <h3>Chat History</h3>
+        <p>View your past conversations.</p>
+      </div>
+      <div id="history-list" class="chat-area"></div>
+      <div class="empty-state" id="history-empty">No chat history available.</div>
+    </div>
+
+    <!-- LIBRARY PANEL -->
+    <div class="side-panel" id="library-panel">
+      <div class="panel-header"><h3>Library</h3><p>PDFs and datasets uploaded into RAG</p></div>
+      <div class="library-wrap">
+        <div id="library-list"></div>
+        <div class="empty-state" id="library-empty">No PDFs or datasets added yet.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = window.location.origin;
+  let selectedFile = null;
+  let awaitingLevel = false;
+  let pendingTopic = "";
+  let pendingFile = null;
+  let sessions = [];
+  let uploadedFiles = JSON.parse(localStorage.getItem('ll-files') || '[]');
+  let datasetSources = JSON.parse(localStorage.getItem('ll-datasets') || '[]');
+  let pendingMessages = [];
+  
+  // Current session tracking
+  let currentSessionId = null;
+  let currentSessionData = {
+    messages: [],
+    videos: [],
+    quizzes: []
+  };
+
+  renderHistory();
+  renderLibrary();
+
+  function showPanel(name) {
+    document.getElementById('ai-panel').classList.toggle('visible', name === 'ai');
+    document.getElementById('history-panel').classList.toggle('visible', name === 'history');
+    document.getElementById('library-panel').classList.toggle('visible', name === 'library');
+    document.getElementById('panel-title').textContent = name === 'ai' ? 'AI Tutor' : name === 'history' ? 'History' : 'Library';
+    if (name === 'history') renderHistory();
+    ['ai','history','library'].forEach(n => {
+      document.getElementById('nav-'+n).classList.toggle('active', n === name);
+    });
+  }
+
+  function handleFileSelect(input) {
+    const file = input.files[0];
+    if (!file) return;
+    selectedFile = file;
+    document.getElementById('file-indicator').innerHTML = `<div class="file-pill">📄 ${file.name} <button onclick="clearFile()">×</button></div>`;
+    if (!uploadedFiles.includes(file.name)) {
+      uploadedFiles.push(file.name);
+      localStorage.setItem('ll-files', JSON.stringify(uploadedFiles));
+      renderLibrary();
+    }
+  }
+
+  function clearFile() {
+    selectedFile = null;
+    document.getElementById('file-upload').value = '';
+    document.getElementById('file-indicator').innerHTML = '';
+  }
+
+  function addBotBubble(html) {
+    const area = document.getElementById('chat-area');
+    const row = document.createElement('div');
+    row.className = 'msg-row';
+    row.innerHTML = `<div class="avatar">🤖</div><div class="bubble bot">${html}</div>`;
+    area.appendChild(row);
+    area.scrollTop = area.scrollHeight;
+    saveMessageToSession('bot', stripHtml(html));
+    return row;
+  }
+
+  function addUserMessage(text) {
+    const area = document.getElementById('chat-area');
+    const row = document.createElement('div');
+    row.className = 'msg-row user';
+    row.innerHTML = `<div class="avatar user-avatar">You</div><div class="bubble user">${text}</div>`;
+    area.appendChild(row);
+    area.scrollTop = area.scrollHeight;
+    saveMessageToSession('user', text);
+  }
+
+  function addStatus(msg) {
+    const area = document.getElementById('chat-area');
+    const el = document.createElement('div');
+    el.className = 'status-msg';
+    el.textContent = msg;
+    area.appendChild(el);
+    area.scrollTop = area.scrollHeight;
+    return el;
+  }
+
+  function renderVideoResult(videoUrl, topic, level, file = null) {
+    const area = document.getElementById('chat-area');
+    const row = document.createElement('div');
+    row.className = 'msg-row';
+    row.innerHTML = `
+      <div class="avatar">🤖</div>
+      <div class="video-bubble">
+        <video src="${API}${videoUrl}" controls></video>
+        <p style="font-size:12px;color:#6b7280;margin-bottom:6px">Video ready! Take the quiz when you're done watching.</p>
+        <button class="quiz-btn">Generate Quiz</button>
+      </div>`;
+    area.appendChild(row);
+    const quizBtn = row.querySelector('.quiz-btn');
+    quizBtn.addEventListener('click', function() {
+      generateQuiz(topic, level, this, file);
+    });
+    area.scrollTop = area.scrollHeight;
+  }
+
+  async function waitForRenderJob(jobId, statusEl, topic, level, file = null) {
+    while (true) {
+      const res = await fetch(`${API}/api/render-jobs/${jobId}`);
+      const job = await res.json();
+
+      if (!res.ok || job.error && job.status !== 'failed') {
+        throw new Error(job.error || 'Could not load render job');
+      }
+
+      if (job.status === 'completed') {
+        statusEl.remove();
+        if (currentSessionId && job.videoUrl) {
+          fetch(`${API}/api/session/${currentSessionId}/video`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              videoUrl: job.videoUrl,
+              scenes: null
+            })
+          }).catch(e => console.error('Error saving video:', e));
+
+          currentSessionData.videos.push({
+            url: job.videoUrl,
+            generatedAt: new Date().toISOString()
+          });
+        }
+        renderVideoResult(job.videoUrl, topic, level, file);
+        await renderHistory();
+        clearFile();
+        return;
+      }
+
+      if (job.status === 'failed') {
+        statusEl.textContent = `❌ ${job.error || 'Video rendering failed.'}`;
+        return;
+      }
+
+      statusEl.textContent = '⏳ Your local render worker is generating the video...';
+      await new Promise(resolve => setTimeout(resolve, 4000));
+    }
+  }
+
+  function showLevelCards(topic, file) {
+    pendingTopic = topic;
+    pendingFile = file;
+    awaitingLevel = true;
+    const area = document.getElementById('chat-area');
+    const row = document.createElement('div');
+    row.className = 'msg-row';
+    row.innerHTML = `
+      <div class="avatar">🤖</div>
+      <div>
+        <div class="bubble bot" style="margin-bottom:10px">Great choice! What level of depth should we go into?</div>
+        <div class="level-cards">
+          <div class="level-card" onclick="selectLevel('school',this)">
+            <div class="level-card-icon" style="background:#EAF3DE">🎓</div>
+            <h4>School</h4><p>Foundations and simple examples</p>
+          </div>
+          <div class="level-card" onclick="selectLevel('bachelors',this)">
+            <div class="level-card-icon" style="background:#E6F1FB">🏛️</div>
+            <h4>College</h4><p>Technical depth and theory</p>
+          </div>
+          <div class="level-card" onclick="selectLevel('masters',this)">
+            <span class="badge-elite">Elite</span>
+            <div class="level-card-icon" style="background:#EEEDFE">🧠</div>
+            <h4>Advanced</h4><p>Deep concepts and optimization</p>
+          </div>
+        </div>
+      </div>`;
+    area.appendChild(row);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  async function selectLevel(level, el) {
+    if (!awaitingLevel) return;
+    awaitingLevel = false;
+    document.querySelectorAll('.level-card').forEach(c => c.onclick = null);
+    el.classList.add('selected');
+    addUserMessage(level.charAt(0).toUpperCase() + level.slice(1));
+    const topic = pendingTopic;
+    const file = pendingFile;
+    await ensureSession(topic, level, file);
+    const st = addStatus('⏳ Generating your video...');
+    try {
+      let videoData;
+      if (file) {
+        const fd = new FormData();
+        fd.append('file', file);
+        if (topic) fd.append('topic', topic);
+        fd.append('difficulty', level);
+        const r = await fetch(API + '/upload', { method: 'POST', body: fd });
+        videoData = await r.json();
+      } else {
+        const r = await fetch(API + '/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic, difficulty: level })
+        });
+        videoData = await r.json();
+      }
+      if (videoData.error) { st.textContent = '❌ ' + videoData.error; return; }
+
+      if (videoData.jobId) {
+        st.textContent = '⏳ Scenes ready. Waiting for your local render worker...';
+        await waitForRenderJob(videoData.jobId, st, topic, level, file);
+        return;
+      }
+
+      st.remove();
+      if (currentSessionId) {
+        fetch(`${API}/api/session/${currentSessionId}/video`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            videoUrl: videoData.video,
+            scenes: null
+          })
+        }).catch(e => console.error('Error saving video:', e));
+
+        currentSessionData.videos.push({
+          url: videoData.video,
+          generatedAt: new Date().toISOString()
+        });
+      }
+
+      renderVideoResult(videoData.video, topic, level, file);
+      await renderHistory();
+      clearFile();
+    } catch (e) {
+      st.textContent = '❌ Something went wrong.';
+    }
+  }
+
+  async function generateQuiz(topic, level, btn, file = null) {
+  btn.disabled = true;
+  btn.textContent = 'Loading...';
+  try {
+    let r;
+    if (file) {
+      const fd = new FormData();
+      fd.append('file', file);
+      if (topic) fd.append('topic', topic);
+      fd.append('difficulty', level);
+      r = await fetch(API + '/upload-quiz', {
+        method: 'POST',
+        body: fd
+      });
+    } else {
+      r = await fetch(API + '/generate-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic, difficulty: level })
+      });
+    }
+    const quiz = await r.json();
+    if (quiz.error) { btn.textContent = 'Error'; return; }
+    btn.remove();
+
+    const area = document.getElementById('chat-area');
+    const row = document.createElement('div');
+    row.className = 'msg-row';
+    const quizId = `quiz-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+    const qs = quiz.map((q, i) => `
+      <div class="quiz-q">
+        <p>${i + 1}. ${q.question}</p>
+        ${q.options.map(o => `<label><input type="radio" name="${quizId}-q${i}" value="${o.replace(/"/g,'&quot;')}"> ${o}</label>`).join('')}
+      </div>`).join('');
+
+    row.innerHTML = `<div class="avatar">🤖</div><div class="quiz-section">${qs}<button class="quiz-submit" id="submit-btn-${Date.now()}">Submit Quiz</button></div>`;
+    area.appendChild(row);
+    area.scrollTop = area.scrollHeight;
+
+    // attach quiz data directly to button — no JSON in onclick
+    const submitBtn = row.querySelector('.quiz-submit');
+    submitBtn._quiz = quiz;
+    submitBtn.addEventListener('click', function() {
+      checkQuiz(this._quiz, this);
+    });
+
+  } catch (e) { btn.textContent = 'Error'; console.error(e); }
+}
+
+  function checkQuiz(quiz, btn) {
+  let score = 0;
+  const userAnswers = [];
+  const container = btn.closest('.quiz-section');
+
+  quiz.forEach((q, i) => {
+    const question = container.querySelectorAll('.quiz-q')[i];
+    const inputs = question ? question.querySelectorAll('input[type="radio"]') : [];
+    const questionName = inputs[0]?.name;
+    const sel = questionName ? container.querySelector(`input[name="${questionName}"]:checked`) : null;
+    const isCorrect = sel && sel.value === q.answer;
+    if (isCorrect) score++;
+    
+    // Track user answers
+    userAnswers.push({
+      question: q.question,
+      userAnswer: sel ? sel.value : null,
+      correctAnswer: q.answer,
+      isCorrect
+    });
+
+    // disable all radios for this question
+    inputs.forEach(radio => {
+      radio.disabled = true;
+      const label = radio.parentElement;
+      if (radio.value === q.answer) {
+        // always highlight correct answer green
+        label.style.cssText = 'color:#27500A;background:#EAF3DE;padding:3px 8px;border-radius:6px;display:block';
+      } else if (radio.checked) {
+        // highlight wrong selected answer red
+        label.style.cssText = 'color:#791F1F;background:#FCEBEB;padding:3px 8px;border-radius:6px;display:block';
+      }
+    });
+  });
+
+  const pct = Math.round((score / quiz.length) * 100);
+  const passed = score >= quiz.length * 0.7;
+
+  // Save quiz result to history
+  if (currentSessionId) {
+    fetch(`${API}/api/session/${currentSessionId}/quiz`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        questions: quiz,
+        userAnswers: userAnswers,
+        score: `${score}/${quiz.length}`,
+        accuracy: `${pct}%`
+      })
+    }).catch(e => console.error('Error saving quiz:', e));
+    
+    // Track locally
+    currentSessionData.quizzes.push({
+      questions: quiz,
+      userAnswers: userAnswers,
+      score: `${score}/${quiz.length}`,
+      accuracy: pct
+    });
+  }
+
+  // replace submit button with result card
+  btn.outerHTML = `
+    <div style="margin-top:12px;padding:12px;border-radius:10px;background:${passed ? '#EAF3DE' : '#FCEBEB'};border:1px solid ${passed ? '#97C459' : '#F09595'}">
+      <p style="font-size:16px;font-weight:600;color:${passed ? '#27500A' : '#791F1F'};margin-bottom:4px">
+        ${passed ? '✅' : '❌'} ${score} / ${quiz.length} &nbsp;·&nbsp; ${pct}% accuracy
+      </p>
+      <p style="font-size:12px;color:${passed ? '#3B6D11' : '#A32D2D'}">
+        ${passed ? 'Great job! You passed.' : 'Keep studying and try again.'}
+      </p>
+    </div>`;
+}
+
+  function sendMessage() {
+    const inp = document.getElementById('chat-input');
+    const text = inp.value.trim();
+    const file = selectedFile;
+    if (!text && !file) return;
+    addUserMessage(text ? (file ? `${text} · 📄 ${file.name}` : text) : `📄 ${file.name}`);
+    inp.value = '';
+    showLevelCards(text, file);
+  }
+
+  async function ensureSession(topic, level, file) {
+    if (currentSessionId) return currentSessionId;
+    try {
+      const res = await fetch(`${API}/api/session/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: topic || (file ? file.name : 'Untitled session'),
+          difficulty: level || 'school',
+          uploadedFile: file ? file.name : null
+        })
+      });
+      const session = await res.json();
+      currentSessionId = session.id;
+      await flushPendingMessages();
+      return currentSessionId;
+    } catch (e) {
+      console.error('Error creating session:', e);
+      return null;
+    }
+  }
+
+  async function saveMessageToSession(role, content) {
+    if (!content || !content.trim()) return;
+    if (!currentSessionId) {
+      pendingMessages.push({ role, content, timestamp: new Date().toISOString() });
+      return;
+    }
+    try {
+      await fetch(`${API}/api/session/${currentSessionId}/message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role, content })
+      });
+    } catch (e) {
+      console.error('Error saving message:', e);
+    }
+  }
+
+  async function flushPendingMessages() {
+    if (!currentSessionId || pendingMessages.length === 0) return;
+    const queue = [...pendingMessages];
+    pendingMessages = [];
+    for (const msg of queue) {
+      await saveMessageToSession(msg.role, msg.content);
+    }
+  }
+
+  function stripHtml(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return (div.textContent || div.innerText || '').trim();
+  }
+
+  async function renderHistory() {
+    const list = document.getElementById('history-list');
+    const empty = document.getElementById('history-empty');
+    if (!list || !empty) return;
+    try {
+      const res = await fetch(`${API}/api/sessions`);
+      sessions = await res.json();
+    } catch (e) {
+      console.error('Error loading sessions:', e);
+      sessions = [];
+    }
+    if (!sessions.length) { empty.style.display = 'block'; list.innerHTML = ''; return; }
+    empty.style.display = 'none';
+    list.innerHTML = sessions.map((s, i) => `
+      <div class="history-item" onclick="viewSessionDetails('${s.id}')">
+        <h5>${s.topic}</h5>
+        <p>${s.difficulty} · ${new Date(s.startTime).toLocaleString()}</p>
+      </div>`).join('');
+  }
+
+  async function viewSessionDetails(sessionId) {
+    try {
+      const detailRes = await fetch(`${API}/api/session/${sessionId}`);
+      const fullSession = await detailRes.json();
+      
+      // Show detailed view in main area
+      showSessionDetails(fullSession);
+    } catch (e) {
+      console.error('Error loading session:', e);
+      alert('Could not load session details');
+    }
+  }
+
+  function showSessionDetails(session) {
+    // Create detailed view modal/panel
+    let html = `
+      <div style="padding:16px;max-height:80vh;overflow-y:auto;background:#fff;">
+        <h2 style="margin-bottom:16px;">${session.topic}</h2>
+        
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+          <div style="background:#E6F1FB;padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:20px;font-weight:600;color:#185FA5;">${session.messages.length}</p>
+            <p style="font-size:12px;color:#6b7280;">Messages</p>
+          </div>
+          <div style="background:#EAF3DE;padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:20px;font-weight:600;color:#27500A;">${session.videos.length}</p>
+            <p style="font-size:12px;color:#6b7280;">Videos</p>
+          </div>
+          <div style="background:#FCE5E5;padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:20px;font-weight:600;color:#791F1F;">${session.quizzes.length}</p>
+            <p style="font-size:12px;color:#6b7280;">Quizzes</p>
+          </div>
+          <div style="background:#FFF3E0;padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:20px;font-weight:600;color:#E65100;">
+              ${session.quizzes.length > 0 ? Math.round(session.quizzes.reduce((sum, q) => sum + parseInt(q.accuracy), 0) / session.quizzes.length) + '%' : 'N/A'}
+            </p>
+            <p style="font-size:12px;color:#6b7280;">Avg Accuracy</p>
+          </div>
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <h3 style="margin-bottom:10px;">Difficulty Level</h3>
+          <p style="background:#f3f4f6;padding:10px;border-radius:6px;color:#6b7280;">${session.difficulty}</p>
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <h3 style="margin-bottom:10px;">Chat Messages (${session.messages.length})</h3>
+          <div style="background:#f9fafb;border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;">
+            ${session.messages.length === 0 ? '<p style="color:#9ca3af;font-size:12px;">No messages</p>' : 
+              session.messages.map(m => `
+              <div style="margin-bottom:8px;padding:8px;background:${m.role === 'user' ? '#E6F1FB' : '#fff'};border-radius:4px;border-left:3px solid ${m.role === 'user' ? '#185FA5' : '#6b7280'};">
+                <p style="font-weight:600;color:${m.role === 'user' ? '#185FA5' : '#6b7280'};font-size:11px;">${m.role === 'user' ? 'You' : 'Bot'}</p>
+                <p style="color:#111;font-size:12px;margin-top:4px;">${m.content}</p>
+                <p style="color:#9ca3af;font-size:10px;margin-top:4px;">${new Date(m.timestamp).toLocaleTimeString()}</p>
+              </div>`).join('')}
+          </div>
+        </div>
+        
+        ${session.videos.length > 0 ? `
+        <div style="margin-bottom:20px;">
+          <h3 style="margin-bottom:10px;">Generated Videos (${session.videos.length})</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${session.videos.map((v, i) => `
+            <div style="background:#f9fafb;padding:12px;border-radius:8px;border:1px solid #e5e7eb;">
+              <p style="font-weight:600;margin-bottom:8px;">Video ${i + 1}</p>
+              <video style="width:100%;border-radius:6px;margin-bottom:8px;" controls src="${API}${v.url}"></video>
+              <p style="font-size:12px;color:#6b7280;">Generated: ${new Date(v.generatedAt).toLocaleString()}</p>
+            </div>`).join('')}
+          </div>
+        </div>` : ''}
+        
+        ${session.quizzes.length > 0 ? `
+        <div style="margin-bottom:20px;">
+          <h3 style="margin-bottom:10px;">Quiz Results (${session.quizzes.length})</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            ${session.quizzes.map((quiz, i) => `
+            <div style="background:#f9fafb;padding:12px;border-radius:8px;border:1px solid #e5e7eb;">
+              <p style="font-weight:600;margin-bottom:8px;">Quiz ${i + 1}</p>
+              <p style="margin-bottom:8px;">
+                <span style="font-size:16px;font-weight:600;color:#185FA5;">${quiz.score}</span>
+                <span style="margin-left:8px;font-size:14px;color:#6b7280;">Accuracy: ${quiz.accuracy}</span>
+              </p>
+              <div style="background:#fff;border-radius:6px;max-height:150px;overflow-y:auto;">
+                ${quiz.userAnswers.map((ans, j) => `
+                <div style="padding:8px;border-bottom:1px solid #e5e7eb;font-size:12px;">
+                  <p style="font-weight:500;margin-bottom:4px;">${j + 1}. ${ans.question}</p>
+                  <p style="color:${ans.isCorrect ? '#27500A' : '#791F1F'};margin:2px 0;">
+                    ${ans.isCorrect ? '✅' : '❌'} Your answer: ${ans.userAnswer || 'Not answered'}
+                  </p>
+                  ${!ans.isCorrect ? `<p style="color:#27500A;margin:2px 0;">Correct: ${ans.correctAnswer}</p>` : ''}
+                </div>`).join('')}
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>` : ''}
+      </div>
+    `;
+    
+    // Show in a modal or panel
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);
+      display:flex;align-items:center;justify-content:center;z-index:10000;
+    `;
+    modal.innerHTML = `
+      <div style="background:#fff;border-radius:12px;width:90%;max-width:700px;max-height:90vh;position:relative;">
+        <button onclick="this.closest('div[style*=z-index]').remove()" style="
+          position:absolute;top:12px;right:12px;background:#f3f4f6;border:none;
+          border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:16px;
+        ">✕</button>
+        ${html}
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  function renderLibrary() {
+    const list = document.getElementById('library-list');
+    const empty = document.getElementById('library-empty');
+    const pdfItems = uploadedFiles.map(f => `
+      <div class="history-item">
+        <h5>📄 ${f}</h5><p>PDF</p>
+      </div>`);
+    const datasetItems = datasetSources.map(source => `
+      <div class="source-item">
+        <h5>🤗 ${source.dataset}</h5>
+        <p>${source.config}/${source.split} · ${source.processedRows} rows · ${source.storedChunks} chunks</p>
+      </div>`);
+    if (!uploadedFiles.length && !datasetSources.length) { empty.style.display = 'block'; list.innerHTML = ''; return; }
+    empty.style.display = 'none';
+    list.innerHTML = [...datasetItems, ...pdfItems].join('');
+  }
+
+  function newSession() {
+    if (currentSessionId) {
+      fetch(`${API}/api/session/${currentSessionId}/end`, { method: 'POST' })
+        .catch(e => console.error('Error ending session:', e));
+    }
+    awaitingLevel = false;
+    pendingTopic = '';
+    pendingFile = null;
+    pendingMessages = [];
+    clearFile();
+    currentSessionId = null;
+    currentSessionData = { messages: [], videos: [], quizzes: [] };
+    document.getElementById('chat-area').innerHTML = `
+      <div class="msg-row">
+        <div class="avatar">🤖</div>
+        <div class="bubble bot">Hello! What would you like to learn about today?</div>
+      </div>`;
+    showPanel('ai');
+  }
+</script>
+</body>
+</html>
