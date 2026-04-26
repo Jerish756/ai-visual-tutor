@@ -34,7 +34,7 @@ You will need the following API keys:
    - `OPENAI_API_KEY`: your-key
    - `PINECONE_API_KEY`: your-key
    - `VIDEO_RENDER_MODE`: `worker`
-   - `RENDER_WORKER_TOKEN`: `ai_tutor_secret_2024` (Must match your local .env)
+   - `RENDER_WORKER_TOKEN`: `070506` (Must match your local .env)
    - `PINECONE_INDEX`: `ai-tutor`
    - `PINECONE_HOST`: `ai-tutor-hikzjgf.svc.aped-4627-b74a.pinecone.io`
 
@@ -45,7 +45,7 @@ Once the Render service is live, you need to run the rendering worker on your co
 1. Create or update your local `.env` file:
    ```env
    REMOTE_API_URL=https://ai-visual-tutor.onrender.com
-   RENDER_WORKER_TOKEN=ai_tutor_secret_2024
+   RENDER_WORKER_TOKEN=070506
    RENDER_WORKER_ID=my-laptop
    LOCAL_ASSET_PORT=3100
    ```
