@@ -87,6 +87,11 @@ async function processJob(job) {
     const durations = await createAudio(job.scenes);
     const outputName = `${job.videoPrefix || "video"}_${job.id}.mp4`;
     await createRemotionVideo(job.scenes, durations, outputName);
+    
+    // ⏳ Wait a moment for Windows to release the file lock
+    console.log("  ⏳ Waiting for file system to release lock...");
+    await sleep(2000);
+    
     await uploadResult(job.id, path.join(ROOT_DIR, outputName));
     cleanupRenderFiles();
   } catch (err) {
