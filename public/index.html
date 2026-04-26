@@ -311,7 +311,12 @@
     awaitingLevel = false;
     document.querySelectorAll('.level-card').forEach(c => c.onclick = null);
     el.classList.add('selected');
-    addUserMessage(level.charAt(0).toUpperCase() + level.slice(1));
+    const displayNames = {
+      'school': 'School',
+      'bachelors': 'College',
+      'masters': 'Advanced'
+    };
+    addUserMessage(displayNames[level] || level);
     const topic = pendingTopic;
     const file = pendingFile;
     await ensureSession(topic, level, file);
